@@ -1,0 +1,85 @@
+<?php
+   session_start(); 
+   include("db_connection.php");
+
+?>  
+<!DOCTYPE html>
+<html>              
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+         
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Ambiental | Nexdrones </title>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilo_mobile.css">
+ <link rel="icon" type="imagem/png" href="imagens/icones/icon_drone1.png" />
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfYYEeexJpXuK5w-DXgWp5sEFp9xjPVgA" >
+    </script>
+        <script type="text/javascript" src="function.js"></script>
+    </head>
+    <body onload="initialize()">
+        <?php include_once("navbar_principal.php");?>
+
+<?php 
+	 $resultado_amb = mysqli_query($conexao, "SELECT * FROM setor_ambiental");
+	 $row_amb= mysqli_fetch_assoc($resultado_amb);
+   ?>
+            
+            <img src="admin/imagens_ambiental/<?php echo $row_amb ['imagem'] ?>" class="img-fluid imgBannerSetores" >
+
+          
+            <!-- Inicio Portifólio l-->
+                <div class="pre_titulo" style="margin-top:25px;">
+                    <p>SETOR</p>
+                </div>
+                <div class="titulo">
+                    <p><?php echo $row_amb['titulo'] ?></p>
+                </div>
+                <div class="img_titulos">
+                    <img src="imagens/icone_drone.png" alt="icone drone">
+                </div>
+                
+            <!-- Fim Portif贸lio -->
+            </div>
+	            <div class="container">
+	               <p class="txt"><?php echo $row_amb['texto'] ?>  </p >
+            </div>
+            
+            <br>    
+
+
+ <?php 
+	 $resultado_solucao = mysqli_query($conexao, "SELECT * FROM setor_ambiental_drone");
+	 $row_solucao = mysqli_fetch_assoc($resultado_solucao );
+   ?>      
+	 <div class="jumbotron banners" style="border-radius: 0;">
+            	<div class="container-fluid">
+                	<div class="row">
+                    		<div class="col-md-6" style="padding:0;">
+	                        <a href="nossos_drones.php">
+	                            <img src="admin/imagens_ambiental/<?php echo $row_solucao['imagem'] ?>" alt="" class="img-fluid" style="width:100%;margin:15px;">
+	                        </a>
+	                     
+	                    </div>
+	                    
+	                    <div class="col-md-6">
+	                        <!-- <h1 class="display-3"></h1> -->
+	                        <h3 class="titulo_banner_servico"><?php echo $row_solucao['titulo'] ?></h3>
+	                        <p class="text_banner_servicos text_justify"><?php echo $row_solucao['texto'] ?>
+	                        </p>
+	                        
+	                    </div>
+	                </div>
+	     	</div>
+	     </div>
+            <?php 
+            include_once("rodape.php");
+            ?>
+
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
